@@ -32,19 +32,6 @@ function App() {
     if (window.FB && window.fbAsyncInit) {
       window.fbAsyncInit();
     }
-
-    // Add message event listener for WhatsApp Embedded Signup
-    // window.addEventListener("message", (event) => {
-    //   if (!event.origin.endsWith("facebook.com")) return;
-    //   try {
-    //     const data = JSON.parse(event.data);
-    //     if (data.type === "WA_EMBEDDED_SIGNUP") {
-    //       console.log("WhatsApp Embedded Signup message event: ", data);
-    //     }
-    //   } catch {
-    //     console.log("WhatsApp Embedded Signup message event: ", event.data);
-    //   }
-    // });
   }, []);
 
   // Response callback as per documentation

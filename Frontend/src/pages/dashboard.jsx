@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 function Dashboard() {
-  const [businessData, setbusinessData] = useState(null);
-
+  // const [businessData, setbusinessData] = useState(null);
+  const businessDataRef = useRef(null);
+  console.log("dashboard rendered");
   useEffect(() => {
+    console.log("useEffect rendered");
     const handleMessage = (event) => {
       if (!event.origin.endsWith("facebook.com")) return;
       try {
@@ -15,7 +17,8 @@ function Dashboard() {
           const data = JSON.parse(event.data);
           if (data.type === "WA_EMBEDDED_SIGNUP") {
             console.log("WhatsApp Embedded Signup message event: ", data);
-            setbusinessData(data.data); // Store the data in state
+            businessDataRef.current = data.data;
+            // setbusinessData(data.data); // Store the data in state
           }
         }
       } catch (error) {
@@ -56,11 +59,14 @@ function Dashboard() {
       const code = response.authResponse.code;
       console.log("WhatsApp signup response code: ", code);
 
-      console.log(businessData);
+      console.log(businessDataRef.current);
       // Now you can access the WhatsApp data from state
-      if (businessData) {
-        console.log("WhatsApp data from event listener:", businessData);
-        saveBusinessData(code);
+      if (businessDataRef.current) {
+        console.log(
+          "WhatsApp data from event listener:",
+          businessDataRef.current
+        );
+        updateBusinessData(code);
         // Use both the response code and WhatsApp data here
       }
     } else {
@@ -98,11 +104,11 @@ function Dashboard() {
     }
   };
 
-  const saveBusinessData = (code) => {
+  const updateBusinessData = (code) => {
     axios
       .post("http://localhost:3000/businessData", {
         tempCode: code,
-        businessData: businessData,
+        businessData: businessDataRef.current,
       })
       .then(function (response) {
         if (response.status === 200) {
