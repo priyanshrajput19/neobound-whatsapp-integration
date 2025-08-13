@@ -1,0 +1,136 @@
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+
+function Dashboard() {
+  const [businessData, setbusinessData] = useState(null);
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (!event.origin.endsWith("facebook.com")) return;
+      try {
+        if (checkJSONString(event.data)) {
+          const data = JSON.parse(event.data);
+          if (data.type === "WA_EMBEDDED_SIGNUP") {
+            console.log("WhatsApp Embedded Signup message event: ", data);
+            setbusinessData(data.data); // Store the data in state
+          }
+        }
+      } catch (error) {
+        console.log("WhatsApp Embedded Signup message event: ", error);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
+  const checkJSONString = (str) => {
+    if (typeof str !== "string") return false;
+
+    const trimmed = str.trim();
+
+    // Quick structural check
+    if (
+      !(trimmed.startsWith("{") && trimmed.endsWith("}")) &&
+      !(trimmed.startsWith("[") && trimmed.endsWith("]"))
+    ) {
+      return false;
+    }
+
+    // Validate JSON syntax
+    try {
+      JSON.parse(trimmed);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  };
+  const fbLoginCallback = (response) => {
+    if (response.authResponse) {
+      const code = response.authResponse.code;
+      console.log("WhatsApp signup response code: ", code);
+
+      console.log(businessData);
+      // Now you can access the WhatsApp data from state
+      if (businessData) {
+        console.log("WhatsApp data from event listener:", businessData);
+        saveBusinessData(code);
+        // Use both the response code and WhatsApp data here
+      }
+    } else {
+      console.log("WhatsApp signup response: ", response);
+    }
+  };
+
+  // Launch method as per documentation
+  const handleWhatsAppSignup = () => {
+    try {
+      console.log("Attempting WhatsApp signup...");
+
+      // Check if Facebook SDK is loaded
+      if (!window.FB) {
+        throw new Error(
+          "Facebook SDK not loaded. Please check your internet connection."
+        );
+      }
+
+      console.log("Facebook SDK found, launching WhatsApp signup...");
+
+      // Launch WhatsApp Embedded Signup as per documentation
+      window.FB.login(fbLoginCallback, {
+        config_id: "607434165525768", // Replace with your actual configuration ID
+        response_type: "code",
+        override_default_response_type: true,
+        extras: {
+          setup: {},
+          featureType: "whatsapp_business_embedded_signup",
+          sessionInfoVersion: "3",
+        },
+      });
+    } catch (error) {
+      console.error("Error launching WhatsApp signup:", error);
+    }
+  };
+
+  const saveBusinessData = (code) => {
+    axios
+      .post("http://localhost:3000/businessData", {
+        tempCode: code,
+        businessData: businessData,
+      })
+      .then(function (response) {
+        if (response.status === 200) {
+          console.log(response);
+        } else {
+          console.log(response);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
+        <Typography variant="h6" color="initial">
+          Dashboard
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: "#17a34a" }}
+          onClick={handleWhatsAppSignup}
+        >
+          Connect to WhatsApp
+        </Button>
+      </div>
+    </div>
+  );
+}
+export default Dashboard;

@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-dashboard-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "description": "A dashboard for managing WhatsApp interactions",
+  "type": "module",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.17.0",
+    "nodemon": "^3.1.10"
+  }
+}
