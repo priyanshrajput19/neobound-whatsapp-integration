@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -10,6 +10,7 @@ function Dashboard() {
   console.log("dashboard rendered");
   useEffect(() => {
     console.log("useEffect rendered");
+
     const handleMessage = (event) => {
       if (!event.origin.endsWith("facebook.com")) return;
       try {

@@ -1,7 +1,17 @@
 import React, { useEffect } from "react";
+import {
+  RouterProvider,
+  BrowserRouter,
+  Routes,
+  Route,
+  Outlet,
+} from "react-router-dom";
 import "./components/Sidebar";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/dashboard";
+// import businessInfo from "./pages/businessInfo";
+// import connectedAcc from "./pages/connectedAcc";
+// import templates from "./pages/templates";
 function App() {
   // Initialize Facebook SDK
   useEffect(() => {
@@ -34,18 +44,9 @@ function App() {
     }
   }, []);
 
-  // Response callback as per documentation
-  // You should handle the response inside a function or effect.
-  // For example, you can define a function to handle the response and call it when needed.
-  // Remove the misplaced response handling code for now.
-
-  // Launch method as per documentation
   return (
     <>
-      <Dashboard />
       <Sidebar />
-      {/* Add other components or routes as needed */}
-      {/* <Footer /> Uncomment if you have a Footer component */}
     </>
   );
 }

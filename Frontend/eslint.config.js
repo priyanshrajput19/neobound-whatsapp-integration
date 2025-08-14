@@ -23,9 +23,7 @@ export default defineConfig([
       },
     },
     rules: {
-      "no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]" }],
-      "no-debugger": "error",
-      "no-alert": "error",
+      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
     },
   },
 ]);
