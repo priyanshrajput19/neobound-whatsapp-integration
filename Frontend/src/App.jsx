@@ -1,17 +1,11 @@
 import React, { useEffect } from "react";
-import {
-  RouterProvider,
-  BrowserRouter,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./components/Sidebar";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/dashboard";
-// import businessInfo from "./pages/businessInfo";
-// import connectedAcc from "./pages/connectedAcc";
-// import templates from "./pages/templates";
+import BusinessInfo from "./pages/businessInfo";
+import ConnectedAcc from "./pages/connectedAcc";
+import Templates from "./pages/templates";
 function App() {
   // Initialize Facebook SDK
   useEffect(() => {
@@ -47,6 +41,14 @@ function App() {
   return (
     <>
       <Sidebar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/businessInfo" element={<BusinessInfo />} />
+          <Route path="/connectedAcc" element={<ConnectedAcc />} />
+          <Route path="/templates" element={<Templates />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
