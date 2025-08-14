@@ -1,6 +1,12 @@
 import express from "express";
 import { connectDB } from "./config/database.js";
 import { InfoModel } from "./models/esResponse.js";
+import dotenv from "dotenv";
+dotenv.config();
+
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+
 const app = express();
 const port = 3000;
 
@@ -32,24 +38,39 @@ connectDB()
   .catch((err) => console.error("Database cannot be connected", err));
 
 app.post("/businessData", async (req, res) => {
-  const { tempCode, businessData } = req.body;
-  console.log(tempCode, businessData);
-  res.status(200).json({ message: "Business data saved successfully" });
+  try {
+    const { tempCode, businessData } = req.body;
+    console.log("Recieved data :", tempCode, businessData);
+    const accessToken = await getAccessToken(tempCode, businessData);
+    // save access token to database
+    const newInfo = new InfoModel({
+      waba_id: businessData.waba_id,
+      phone_number_id: businessData.phone_number_id,
+      business_id: businessData.business_id,
+      access_token: accessToken,
+    });
+    await newInfo.save();
+
+    res.status(200).json({ message: "Business data saved successfully" });
+  } catch (error) {
+    console.log("Error saving business data", error);
+    res.status(500).json({ message: "Error saving business data" });
+  }
 });
 
-// app.post("/esResponse", async (req, res) => {
-//   const url = "https://graph.facebook.com/v22.0/oauth/access_token";
-//   const response = await fetch(url, {
-//     method: "POST",
-//     body: JSON.stringify({
-//       client_id: "1456392682027447",
-//       client_secret: "********************************",
-//       grant_type: "authorization_code",
-//       redirect_uri:
-//         "https://developers.facebook.com/es/oauth/callback/?business_id=163827667799847&nonce=jhfjuZ5UFrKoojLFc8IP1lUOU8W0wPhr",
-//     }),
-//     headers: { "Content-Type": "application/json" },
-//   });
-//   const data = await response.json();
-//   console.log(data);
-// });
+const getAccessToken = async (tempCode, businessData) => {
+  const url = "https://graph.facebook.com/v22.0/oauth/access_token";
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify({
+      client_id: client_id,
+      client_secret: client_secret,
+      code: tempCode,
+      grant_type: "authorization_code",
+    }),
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  console.log(data);
+  return data.access_token;
+};

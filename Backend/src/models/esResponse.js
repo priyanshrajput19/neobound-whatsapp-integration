@@ -10,13 +10,8 @@ const esResponseSchema = new mongoose.Schema({
   business_id: {
     type: String,
   },
-  business_name: {
-    type: String,
-  },
-
   access_token: {
     type: String,
-    required: true,
   },
 });
 

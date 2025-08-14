@@ -5,8 +5,3 @@ export const connectDB = async () => {
     "mongodb+srv://Priyansh:neoubound.ai@neoboundai.tdlnwab.mongodb.net/neobound"
   );
 };
-//  WABA id:
-//  phone no id :
-// access token(permamnent)
-
-//
