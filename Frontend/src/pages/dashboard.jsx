@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import Sidebar from "../components/Sidebar";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -122,21 +124,22 @@ function Dashboard() {
       });
   };
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
-        <Typography variant="h6" color="initial">
-          Dashboard
-        </Typography>
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "#17a34a" }}
-          onClick={handleWhatsAppSignup}
-        >
-          Connect to WhatsApp
-        </Button>
+    <>
+      <div>
+        <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
+          <Typography variant="h6" color="initial">
+            Dashboard
+          </Typography>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: "#17a34a" }}
+            onClick={handleWhatsAppSignup}
+          >
+            Connect to WhatsApp
+          </Button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 export default Dashboard;

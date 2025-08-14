@@ -6,6 +6,8 @@ import Dashboard from "./pages/dashboard";
 import BusinessInfo from "./pages/businessInfo";
 import ConnectedAcc from "./pages/connectedAcc";
 import Templates from "./pages/templates";
+import Typography from "@mui/material/Typography";
+import Layout from "./components/layout";
 function App() {
   // Initialize Facebook SDK
   useEffect(() => {
@@ -40,13 +42,14 @@ function App() {
 
   return (
     <>
-      <Sidebar />
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/businessInfo" element={<BusinessInfo />} />
-          <Route path="/connectedAcc" element={<ConnectedAcc />} />
-          <Route path="/templates" element={<Templates />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/templates" element={<Templates />} />
+            <Route path="/businessInfo" element={<BusinessInfo />} />
+            <Route path="/connectedAcc" element={<ConnectedAcc />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
