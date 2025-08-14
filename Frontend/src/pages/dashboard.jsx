@@ -51,7 +51,8 @@ function Dashboard() {
     try {
       JSON.parse(trimmed);
       return true;
-    } catch (e) {
+    } catch (error) {
+      console.log("Error in checkJSONString: ", error);
       return false;
     }
   };
@@ -74,8 +75,6 @@ function Dashboard() {
       console.log("WhatsApp signup response: ", response);
     }
   };
-
-  // Launch method as per documentation
   const handleWhatsAppSignup = () => {
     try {
       console.log("Attempting WhatsApp signup...");
