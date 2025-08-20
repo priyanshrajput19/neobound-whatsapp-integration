@@ -42,16 +42,18 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename="/">
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="templates" element={<Templates />} />
-            <Route path="businessInfo" element={<BusinessInfo />} />
-            <Route path="connectedAcc" element={<ConnectedAcc />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <div>
+        <BrowserRouter basename="/">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="templates" element={<Templates />} />
+              <Route path="businessInfo" element={<BusinessInfo />} />
+              <Route path="connectedAcc" element={<ConnectedAcc />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,6 +16,16 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 const drawerWidth = 240;
 function Sidebar() {
+  const navigate = useNavigate();
+  const navigationItems = [
+    { text: "Dashboard", path: "/dashboard" },
+    { text: "Connected Accounts", path: "/connectedAcc" },
+    { text: "Templates", path: "/templates" },
+    { text: "Business Info", path: "/businessInfo" },
+  ];
+  const handleNavigation = (route) => {
+    navigate(route);
+  };
   return (
     <>
       <Drawer
@@ -22,29 +33,37 @@ function Sidebar() {
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
+            borderRight: "1px solid #979797",
             width: drawerWidth,
             boxSizing: "border-box",
+            backgroundColor: "#303036",
           },
         }}
         variant="permanent"
         anchor="left"
       >
-        <Toolbar sx={{ color: "black" }}>
+        <Toolbar sx={{ color: "white" }}>
           <Typography noWrap component="div">
             Whatsapp Dashboard
           </Typography>
         </Toolbar>
 
         <List>
-          {[
-            "Dashboard",
-            "Connected Accounts",
-            "Templates",
-            "Business Info",
-          ].map((text) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemText primary={text} />
+          {navigationItems.map((item) => (
+            <ListItem key={item.text} disablePadding>
+              <ListItemButton
+                sx={{
+                  color: "white",
+                  borderRadius: "10px",
+                  margin: "10px",
+                  "&:hover": {
+                    backgroundColor: "#34a34a",
+                    color: "white",
+                  },
+                }}
+                onClick={() => handleNavigation(item.path)}
+              >
+                <ListItemText primary={item.text} />
               </ListItemButton>
             </ListItem>
           ))}
