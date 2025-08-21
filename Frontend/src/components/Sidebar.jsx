@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { grey } from "@mui/material/colors";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,6 +16,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+const color = [grey[600]];
 const drawerWidth = 240;
 function Sidebar() {
   const navigate = useNavigate();
@@ -33,7 +36,7 @@ function Sidebar() {
           width: drawerWidth,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            borderRight: "1px solid #979797",
+            borderRight: `0.5px solid ${color}`,
             width: drawerWidth,
             boxSizing: "border-box",
             backgroundColor: "#303036",
@@ -64,6 +67,7 @@ function Sidebar() {
                 onClick={() => handleNavigation(item.path)}
               >
                 <ListItemText primary={item.text} />
+                <ListItemIcon></ListItemIcon>
               </ListItemButton>
             </ListItem>
           ))}

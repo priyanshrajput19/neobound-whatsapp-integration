@@ -42,7 +42,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="bg-zinc-800 h-dvh">
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Layout />}>

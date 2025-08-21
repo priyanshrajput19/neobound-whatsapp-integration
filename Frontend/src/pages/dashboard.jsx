@@ -125,9 +125,9 @@ function Dashboard() {
   };
   return (
     <>
-      <div className="bg-zinc-900 h-dvh">
+      <div>
         <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
-          <Typography sx={{ color: "white" }} variant="h6" color="initial">
+          <Typography variant="h6" color="white">
             Dashboard
           </Typography>
 

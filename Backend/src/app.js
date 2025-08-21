@@ -42,20 +42,32 @@ app.post("/businessData", async (req, res) => {
     const { tempCode, businessData } = req.body;
     console.log("Recieved data :", tempCode, businessData);
     const accessToken = await getAccessToken(tempCode, businessData);
+    const businessDetail = await fetchBusinessDetail(accessToken, businessData);
+    console.log("Business detail :", businessDetail);
     // save access token to database
     const newInfo = new InfoModel({
       waba_id: businessData.waba_id,
       phone_number_id: businessData.phone_number_id,
       business_id: businessData.business_id,
       access_token: accessToken,
+      business_name: businessDetail.name,
     });
     await newInfo.save();
 
-    res.status(200).json({ message: "Business data saved successfully" });
+    res.status(200).json({
+      message: "Business data saved successfully",
+      business_name: businessDetail.name,
+      business_id: businessData.business_id,
+    });
   } catch (error) {
     console.log("Error saving business data", error);
     res.status(500).json({ message: "Error saving business data" });
   }
+});
+
+app.get("/businessData", async (req, res) => {
+  const businessData = await InfoModel.find();
+  res.status(200).json(businessData);
 });
 
 const getAccessToken = async (tempCode, businessData) => {
@@ -73,4 +85,21 @@ const getAccessToken = async (tempCode, businessData) => {
   const data = await response.json();
   console.log(data);
   return data.access_token;
+};
+
+const fetchBusinessDetail = async (accessToken, businessData) => {
+  const fields = ["name"];
+  const url =
+    "https://graph.facebook.com/v22.0/" +
+    businessData.business_id +
+    "?fields=" +
+    fields.join(",") +
+    "&access_token=" +
+    accessToken;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  return data;
 };

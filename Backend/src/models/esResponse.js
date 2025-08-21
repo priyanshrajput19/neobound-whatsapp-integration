@@ -13,6 +13,9 @@ const esResponseSchema = new mongoose.Schema({
   access_token: {
     type: String,
   },
+  business_name: {
+    type: String,
+  },
 });
 
 export const InfoModel = mongoose.model("BusinessInfo", esResponseSchema);
