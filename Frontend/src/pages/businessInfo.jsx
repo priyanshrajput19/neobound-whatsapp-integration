@@ -8,7 +8,7 @@ function businessInfo() {
     <>
       <div>
         <div className=" header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
-          <Typography variant="h6" color="white">
+          <Typography variant="h6" color="#bfbfbf">
             Business Info
           </Typography>
         </div>

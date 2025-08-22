@@ -3,30 +3,41 @@ import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import axios from "axios";
+import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 const ConnectedAcc = () => {
   const [businessData, setBusinessData] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
-    axios.get("http://localhost:3000/businessData").then((res) => {
-      setBusinessData(res.data);
-    });
+    axios
+      .get("http://localhost:3000/businessData")
+      .then(async (res) => {
+        await setBusinessData(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
-  console.log(businessData);
+  const createTemplateHandler = () => {
+    navigate("/templates");
+  };
 
   return (
     <div>
       <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5">
-        <Typography variant="h6" color="white">
+        <Typography variant="h6" color="#bfbfbf">
           Connected Accounts
         </Typography>
       </div>
 
       {/* Integration Cards */}
       <div className="ml-60 pt-4 pl-5 pr-5">
-        <div style={{ width: "100%" }}>
+        <div>
           {businessData.map((data, index) => (
             <Card
               key={index}
@@ -35,7 +46,7 @@ const ConnectedAcc = () => {
                 borderRadius: "12px",
                 border: "1px solid #3a3a3a",
                 marginBottom: "16px",
-                transition: "all 0.3s ease",
+                transition: "all .3s ease",
                 "&:hover": {
                   transform: "translateY(-2px)",
                   boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
@@ -44,26 +55,14 @@ const ConnectedAcc = () => {
               }}
             >
               <CardContent sx={{ padding: "24px" }}>
-                <Box>
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      color: "white",
-                      fontWeight: "600",
-                      marginBottom: "8px",
-                    }}
-                  >
-                    {data.business_name}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: "#cccccc",
-                      lineHeight: "1.5",
-                    }}
-                  >
-                    {data.business_id}
-                  </Typography>
+                <Box className="flex justify-between">
+                  <Stack direction="column">
+                    <Typography sx={{ color: "#bfbfbf" }}>{data.business_name}</Typography>
+                    <Typography color="#bfbfbf">{data.business_id}</Typography>
+                  </Stack>
+                  <Button variant="contained" sx={{ backgroundColor: "#17a34a", color: "white" }} onClick={createTemplateHandler}>
+                    Create template
+                  </Button>
                 </Box>
               </CardContent>
             </Card>

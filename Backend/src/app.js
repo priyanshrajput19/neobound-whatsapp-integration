@@ -14,10 +14,7 @@ const port = 3000;
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 
   // Handle preflight requests
   if (req.method === "OPTIONS") {
@@ -58,6 +55,8 @@ app.post("/businessData", async (req, res) => {
       message: "Business data saved successfully",
       business_name: businessDetail.name,
       business_id: businessData.business_id,
+      waba_id: businessData.waba_id,
+      phone_number_id: businessData.phone_number_id,
     });
   } catch (error) {
     console.log("Error saving business data", error);
@@ -68,6 +67,24 @@ app.post("/businessData", async (req, res) => {
 app.get("/businessData", async (req, res) => {
   const businessData = await InfoModel.find();
   res.status(200).json(businessData);
+});
+
+app.get("/viewTemplates", async (req, res) => {
+  const { waba_id } = req.query;
+
+  const document = await InfoModel.findOne({ waba_id: waba_id });
+  if (!document) {
+    res.status(404).json({ message: "Business data not found" });
+    return;
+  }
+
+  const url = `https://graph.facebook.com/v22.0/${waba_id}/message_templates?fields=language,name,rejected_reason,status,category,sub_category,last_updated_time,components,quality_score&limit=50&access_token=${document.access_token}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  res.status(200).json(data);
 });
 
 const getAccessToken = async (tempCode, businessData) => {
@@ -89,13 +106,7 @@ const getAccessToken = async (tempCode, businessData) => {
 
 const fetchBusinessDetail = async (accessToken, businessData) => {
   const fields = ["name"];
-  const url =
-    "https://graph.facebook.com/v22.0/" +
-    businessData.business_id +
-    "?fields=" +
-    fields.join(",") +
-    "&access_token=" +
-    accessToken;
+  const url = "https://graph.facebook.com/v22.0/" + businessData.waba_id + "?fields=" + fields.join(",") + "&access_token=" + accessToken;
   const response = await fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

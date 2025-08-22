@@ -42,10 +42,7 @@ function Dashboard() {
     const trimmed = str.trim();
 
     // Quick structural check
-    if (
-      !(trimmed.startsWith("{") && trimmed.endsWith("}")) &&
-      !(trimmed.startsWith("[") && trimmed.endsWith("]"))
-    ) {
+    if (!(trimmed.startsWith("{") && trimmed.endsWith("}")) && !(trimmed.startsWith("[") && trimmed.endsWith("]"))) {
       return false;
     }
 
@@ -66,10 +63,7 @@ function Dashboard() {
       console.log(businessDataRef.current);
       // Now you can access the WhatsApp data from state
       if (businessDataRef.current) {
-        console.log(
-          "WhatsApp data from event listener:",
-          businessDataRef.current
-        );
+        console.log("WhatsApp data from event listener:", businessDataRef.current);
         updateBusinessData(code);
         // Use both the response code and WhatsApp data here
       }
@@ -83,9 +77,7 @@ function Dashboard() {
 
       // Check if Facebook SDK is loaded
       if (!window.FB) {
-        throw new Error(
-          "Facebook SDK not loaded. Please check your internet connection."
-        );
+        throw new Error("Facebook SDK not loaded. Please check your internet connection.");
       }
 
       console.log("Facebook SDK found, launching WhatsApp signup...");
@@ -127,15 +119,13 @@ function Dashboard() {
     <>
       <div>
         <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
-          <Typography variant="h6" color="white">
-            Dashboard
+          <Typography variant="h6" color="#bfbfbf">
+            WhatsApp Integration
+            <br />
+            Connect your WhatsApp Business and send messages, manage templates and edit your business info
           </Typography>
 
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: "#17a34a" }}
-            onClick={handleWhatsAppSignup}
-          >
+          <Button variant="contained" sx={{ backgroundColor: "#17a34a" }} onClick={handleWhatsAppSignup}>
             Connect to WhatsApp
           </Button>
         </div>
