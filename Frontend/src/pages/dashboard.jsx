@@ -80,7 +80,7 @@ function Dashboard() {
 
       // Launch WhatsApp Embedded Signup as per documentation
       window.FB.login(fbLoginCallback, {
-        config_id: "607434165525768", // Replace with your actual configuration ID
+        config_id: import.meta.env.VITE_FACEBOOK_CONFIG_ID || "607434165525768", // Use environment variable
         response_type: "code",
         override_default_response_type: true,
         extras: {
@@ -95,8 +95,9 @@ function Dashboard() {
   };
 
   const updateBusinessData = (code) => {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
     axios
-      .post("http://localhost:3000/businessData", {
+      .post(`${apiUrl}/businessData`, {
         tempCode: code,
         businessData: businessDataRef.current,
       })

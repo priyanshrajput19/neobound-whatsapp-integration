@@ -22,7 +22,7 @@ const Templates = () => {
 
   useEffect(() => {
     // axios
-    //   .get("http://localhost:3000/businessData")
+    //   .get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/businessData`)
     //   .then((res) => {
     //     setBusinessData(res.data);
     //   })
@@ -32,7 +32,7 @@ const Templates = () => {
     // setBusinessData(_dummyData);
     // console.log("businessData", businessData);
 
-    //ye code comment delete karna hai yah se start karna hai
+    //ye code delete karna hai yah se start karna hai
     var _dummyData = [{
       business_name: "Test Business",
       business_id: "1234567890",
@@ -54,7 +54,7 @@ const Templates = () => {
       // const params = {
       //   waba_id: waba_id,
       // };
-      // const response = await axios.get("http://localhost:3000/viewTemplates", { params });
+      // const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/viewTemplates`, { params });
       // console.log("Template data", response.data.data);
 
       // // Store templates for this specific business
@@ -64,7 +64,7 @@ const Templates = () => {
       // }));
       // setExpandedBusiness(expandedBusiness === businessIndex ? null : businessIndex);
 
-      //Ye codee comment delete karna hai yah se start karna hai
+      //Ye code  delete karna hai yah se start karna hai
       var _dummyData = [{
         businessIndex: 0,
         name: "seasonal_promotion",

@@ -15,7 +15,7 @@ function App() {
       console.log("fbAsyncInit called");
       try {
         // Check if App ID is configured
-        const appId = "1456392682027447";
+        const appId = import.meta.env.VITE_FACEBOOK_APP_ID || "1456392682027447";
         if (appId === "YOUR_FACEBOOK_APP_ID" || appId === "") {
           return;
         }
@@ -24,7 +24,7 @@ function App() {
           appId: appId,
           autoLogAppEvents: true,
           xfbml: true,
-          version: "v23.0", // Use requested version
+          version: import.meta.env.VITE_FACEBOOK_VERSION || "v23.0",
         });
         console.log("Facebook SDK initialized successfully");
       } catch (error) {

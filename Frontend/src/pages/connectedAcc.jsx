@@ -6,9 +6,11 @@ import axios from "axios";
 const ConnectedAcc = () => {
   const [businessData, setBusinessData] = useState([]);
   const navigate = useNavigate();
+  
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
     axios
-      .get("http://localhost:3000/businessData")
+      .get(`${apiUrl}/businessData`)
       .then(async (res) => {
         await setBusinessData(res.data);
         console.log(res.data);
