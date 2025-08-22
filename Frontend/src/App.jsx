@@ -1,13 +1,11 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./components/Sidebar";
-import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/dashboard";
 import BusinessInfo from "./pages/businessInfo";
 import ConnectedAcc from "./pages/connectedAcc";
-import Templates from "./pages/templates";
-import Typography from "@mui/material/Typography";
+import Templates from "./pages/Templates/templates.jsx";
 import Layout from "./components/layout";
+
 function App() {
   // Initialize Facebook SDK
   useEffect(() => {

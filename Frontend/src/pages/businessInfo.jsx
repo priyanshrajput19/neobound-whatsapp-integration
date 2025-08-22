@@ -1,7 +1,5 @@
-import { Router } from "react-router-dom";
-import Divider from "@mui/material/Divider";
 import React from "react";
-import Typography from "@mui/material/Typography";
+import { Divider, Typography } from "@mui/material";
 
 function businessInfo() {
   return (
