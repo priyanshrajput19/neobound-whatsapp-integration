@@ -6,7 +6,8 @@ import ConnectedAcc from "./pages/connectedAcc";
 import Templates from "./pages/Templates/templates.jsx";
 import Layout from "./components/layout";
 
-function App() {
+const App = () => {
+  
   // Initialize Facebook SDK
   useEffect(() => {
     console.log("App component mounted, loading Facebook SDK script...");
