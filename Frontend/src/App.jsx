@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./components/Sidebar";
-import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/dashboard";
 import BusinessInfo from "./pages/businessInfo";
 import ConnectedAcc from "./pages/connectedAcc";
-import Templates from "./pages/Templates/templates";
-import Typography from "@mui/material/Typography";
+import Templates from "./pages/Templates/templates.jsx";
 import Layout from "./components/layout";
-function App() {
+
+const App = () => {
   // Initialize Facebook SDK
   useEffect(() => {
     console.log("App component mounted, loading Facebook SDK script...");
@@ -17,7 +15,7 @@ function App() {
       console.log("fbAsyncInit called");
       try {
         // Check if App ID is configured
-        const appId = "1456392682027447";
+        const appId = import.meta.env.VITE_FACEBOOK_APP_ID || "1456392682027447";
         if (appId === "YOUR_FACEBOOK_APP_ID" || appId === "") {
           return;
         }
@@ -26,7 +24,7 @@ function App() {
           appId: appId,
           autoLogAppEvents: true,
           xfbml: true,
-          version: "v23.0", // Use requested version
+          version: import.meta.env.VITE_FACEBOOK_VERSION || "v23.0",
         });
         console.log("Facebook SDK initialized successfully");
       } catch (error) {
@@ -56,6 +54,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;

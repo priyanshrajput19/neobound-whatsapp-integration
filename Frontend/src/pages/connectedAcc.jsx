@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import axios from "axios";
-import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
-import URL from "../utils/Constants";
+import { Typography, Card, CardContent, Box, Button, Stack } from "@mui/material";
+import axios from "axios";
 
 const ConnectedAcc = () => {
   const [businessData, setBusinessData] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
     axios
-      .get(URL + "/businessData")
+      .get(`${apiUrl}/businessData`)
       .then(async (res) => {
         await setBusinessData(res.data);
         console.log(res.data);

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination, Paper } from "@mui/material";
+import { tableStyles } from "./TableComponent.styles";
 
 // Make the component accept props for dynamic configuration
 const TableComponent = ({
@@ -23,13 +24,18 @@ const TableComponent = ({
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data.length) : 0;
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+    <Paper sx={tableStyles.paper}>
+      <TableContainer sx={tableStyles.tableContainer}>
+        <Table stickyHeader aria-label="sticky table" sx={tableStyles.table}>
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
-                <TableCell key={column.id} align={column.align || "left"} style={{ minWidth: column.minWidth }}>
+              {columns.map((column, colIndex) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align || "left"}
+                  style={{ minWidth: column.minWidth }}
+                  sx={tableStyles.headerCell}
+                >
                   {column.label}
                 </TableCell>
               ))}
@@ -38,9 +44,22 @@ const TableComponent = ({
           <TableBody>
             {data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
-                <TableRow hover role="checkbox" aria-checked={false} tabIndex={-1} key={row.id || index} selected={false} onClick={() => onRowClick && onRowClick(row)} sx={{ cursor: onRowClick ? "pointer" : "default" }}>
-                  {columns.map((column) => (
-                    <TableCell key={column.id} align={column.align || "left"}>
+                <TableRow
+                  hover
+                  role="checkbox"
+                  aria-checked={false}
+                  tabIndex={-1}
+                  key={row.id || index}
+                  selected={false}
+                  onClick={() => onRowClick && onRowClick(row)}
+                  sx={onRowClick ? tableStyles.tableRow : tableStyles.defaultRow}
+                >
+                  {columns.map((column, colIndex) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align || "left"}
+                      sx={tableStyles.bodyCell}
+                    >
                       {column.render ? column.render(row[column.id], row) : row[column.id]}
                     </TableCell>
                   ))}
@@ -55,7 +74,16 @@ const TableComponent = ({
           </TableBody>
         </Table>
       </TableContainer>
-      <TablePagination rowsPerPageOptions={[5, 10, 25]} component="div" count={data.length} rowsPerPage={rowsPerPage} page={page} onPageChange={handleChangePage} onRowsPerPageChange={handleChangeRowsPerPage} />
+      <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={data.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={tableStyles.pagination}
+      />
     </Paper>
   );
 };

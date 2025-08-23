@@ -1,16 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import Sidebar from "../components/Sidebar";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { Typography, Button, Stack } from "@mui/material";
+import { checkJSONString } from "../utils/utility";
 import axios from "axios";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import URL from "../utils/Constants";
 
-function Dashboard() {
-  // const [businessData, setbusinessData] = useState(null);
+const Dashboard = () => {
   const businessDataRef = useRef(null);
   console.log("dashboard rendered");
+
   useEffect(() => {
     console.log("useEffect rendered");
 
@@ -22,7 +18,6 @@ function Dashboard() {
           if (data.type === "WA_EMBEDDED_SIGNUP") {
             console.log("WhatsApp Embedded Signup message event: ", data);
             businessDataRef.current = data.data;
-            // setbusinessData(data.data); // Store the data in state
           }
         }
       } catch (error) {
@@ -37,25 +32,7 @@ function Dashboard() {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
-  const checkJSONString = (str) => {
-    if (typeof str !== "string") return false;
 
-    const trimmed = str.trim();
-
-    // Quick structural check
-    if (!(trimmed.startsWith("{") && trimmed.endsWith("}")) && !(trimmed.startsWith("[") && trimmed.endsWith("]"))) {
-      return false;
-    }
-
-    // Validate JSON syntax
-    try {
-      JSON.parse(trimmed);
-      return true;
-    } catch (error) {
-      console.log("Error in checkJSONString: ", error);
-      return false;
-    }
-  };
   const fbLoginCallback = (response) => {
     if (response.authResponse) {
       const code = response.authResponse.code;
@@ -72,6 +49,7 @@ function Dashboard() {
       console.log("WhatsApp signup response: ", response);
     }
   };
+
   const handleWhatsAppSignup = () => {
     try {
       console.log("Attempting WhatsApp signup...");
@@ -85,7 +63,7 @@ function Dashboard() {
 
       // Launch WhatsApp Embedded Signup as per documentation
       window.FB.login(fbLoginCallback, {
-        config_id: "607434165525768", // Replace with your actual configuration ID
+        config_id: import.meta.env.VITE_FACEBOOK_CONFIG_ID || "607434165525768", // Use environment variable
         response_type: "code",
         override_default_response_type: true,
         extras: {
@@ -100,8 +78,9 @@ function Dashboard() {
   };
 
   const updateBusinessData = (code) => {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
     axios
-      .post(URL + "/businessData", {
+      .post(`${apiUrl}/businessData`, {
         tempCode: code,
         businessData: businessDataRef.current,
       })
@@ -116,22 +95,27 @@ function Dashboard() {
         console.log(error);
       });
   };
+
   return (
-    <>
-      <div>
-        <div className="header flex justify-between ml-60 pt-2 pl-5 pr-5  ">
+    <div className="p-4">
+      <div className="header flex justify-between ml-60 items-center">
+        <Stack direction="column" spacing={0}>
           <Typography variant="h6" color="#bfbfbf">
             WhatsApp Integration
-            <br />
+          </Typography>
+          <Typography variant="body1" color="#999999">
             Connect your WhatsApp Business and send messages, manage templates and edit your business info
           </Typography>
+        </Stack>
 
-          <Button variant="contained" sx={{ backgroundColor: "#17a34a" }} onClick={handleWhatsAppSignup}>
+        <Stack direction="row" spacing={2}>
+          <Button variant="contained" sx={{ backgroundColor: "#17a34a" }} className="h-10" onClick={handleWhatsAppSignup}>
             Connect to WhatsApp
           </Button>
-        </div>
+        </Stack>
       </div>
-    </>
+    </div>
   );
-}
+};
+
 export default Dashboard;
