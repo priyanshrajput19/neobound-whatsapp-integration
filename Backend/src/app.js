@@ -2,6 +2,7 @@ import express from "express";
 import { connectDB } from "./config/database.js";
 import { InfoModel } from "./models/esResponse.js";
 import dotenv from "dotenv";
+import { URL } from "./utils/constants.js";
 dotenv.config();
 
 const client_id = process.env.CLIENT_ID;

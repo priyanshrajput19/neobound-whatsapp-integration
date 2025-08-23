@@ -11,6 +11,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import URL from "../utils/Constants";
 
 const Templates = () => {
   const COLUMNS = [
@@ -33,7 +34,7 @@ const Templates = () => {
       const params = {
         waba_id: waba_id,
       };
-      const response = await axios.get("http://localhost:3000/viewTemplates", { params });
+      const response = await axios.get(URL + "/viewTemplates", { params });
       console.log("Template data", response.data.data);
 
       // Store templates for this specific business
@@ -119,7 +120,7 @@ const Templates = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/businessData")
+      .get(URL + "/businessData")
       .then((res) => {
         setBusinessData(res.data);
       })

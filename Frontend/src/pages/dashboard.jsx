@@ -5,6 +5,7 @@ import axios from "axios";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import URL from "../utils/Constants";
 
 function Dashboard() {
   // const [businessData, setbusinessData] = useState(null);
@@ -100,7 +101,7 @@ function Dashboard() {
 
   const updateBusinessData = (code) => {
     axios
-      .post("http://localhost:3000/businessData", {
+      .post(URL + "/businessData", {
         tempCode: code,
         businessData: businessDataRef.current,
       })

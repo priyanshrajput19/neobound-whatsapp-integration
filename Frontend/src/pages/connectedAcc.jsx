@@ -7,13 +7,14 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
+import URL from "../utils/Constants";
 
 const ConnectedAcc = () => {
   const [businessData, setBusinessData] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:3000/businessData")
+      .get(URL + "/businessData")
       .then(async (res) => {
         await setBusinessData(res.data);
         console.log(res.data);
