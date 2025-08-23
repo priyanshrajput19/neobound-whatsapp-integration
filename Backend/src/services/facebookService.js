@@ -14,13 +14,12 @@ export const getAccessToken = async (tempCode, businessData) => {
     headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
-  console.log(data);
   return data.access_token;
 };
 
-export const fetchBusinessDetail = async (accessToken, businessData) => {
+export const fetchBusinessName = async (accessToken, businessData) => {
   const fields = ["name"];
-  const url = "https://graph.facebook.com/v22.0/" + businessData.waba_id + "?fields=" + fields.join(",") + "&access_token=" + accessToken;
+  const url = `https://graph.facebook.com/v22.0/${businessData.waba_id}?fields=${fields.join(",")}&access_token=${accessToken}`;
   const response = await fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
@@ -30,7 +29,8 @@ export const fetchBusinessDetail = async (accessToken, businessData) => {
 };
 
 export const fetchMessageTemplates = async (waba_id, access_token) => {
-  const url = `https://graph.facebook.com/v22.0/${waba_id}/message_templates?fields=language,name,rejected_reason,status,category,sub_category,last_updated_time,components,quality_score&limit=50&access_token=${access_token}`;
+  const fields = ["language", "name", "rejected_reason", "status", "category", "sub_category", "last_updated_time", "components", "quality_score"];
+  const url = `https://graph.facebook.com/v22.0/${waba_id}/message_templates?fields=${fields.join(",")}&limit=50&access_token=${access_token}`;
   const response = await fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },

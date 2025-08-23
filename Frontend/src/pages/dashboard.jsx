@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from "react";
-import {Typography, Button, Stack } from "@mui/material";
-import { checkJSONString } from "../util/utility";
+import { Typography, Button, Stack } from "@mui/material";
+import { checkJSONString } from "../utils/utility";
 import axios from "axios";
 
 const Dashboard = () => {
-
   const businessDataRef = useRef(null);
   console.log("dashboard rendered");
-  
-	useEffect(() => {
+
+  useEffect(() => {
     console.log("useEffect rendered");
 
     const handleMessage = (event) => {
@@ -117,6 +116,6 @@ const Dashboard = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

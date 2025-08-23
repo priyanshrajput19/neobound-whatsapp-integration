@@ -21,88 +21,33 @@ const Templates = () => {
   const [expandedBusiness, setExpandedBusiness] = useState(null);
 
   useEffect(() => {
-    // axios
-    //   .get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/businessData`)
-    //   .then((res) => {
-    //     setBusinessData(res.data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    // setBusinessData(_dummyData);
-    // console.log("businessData", businessData);
-
-    //ye code delete karna hai yah se start karna hai
-    var _dummyData = [{
-      business_name: "Test Business",
-      business_id: "1234567890",
-      waba_id: "1234567890",
-      phone_number_id: "1234567890",
-    }, {
-      business_name: "Test Business 2",
-      business_id: "1234567890",
-      waba_id: "1234567890",
-      phone_number_id: "1234567890",
-    }]
-    setBusinessData(_dummyData);
-    console.log("businessData", businessData);
-    //yah tak delete karna hai
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+    axios
+      .get(`${apiUrl}/businessData`)
+      .then((res) => {
+        setBusinessData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   const viewTemplates = async (waba_id, businessIndex) => {
     try {
-      // const params = {
-      //   waba_id: waba_id,
-      // };
-      // const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:3000"}/viewTemplates`, { params });
-      // console.log("Template data", response.data.data);
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+      const params = {
+        waba_id: waba_id,
+      };
+      const response = await axios.get(`${apiUrl}/viewTemplates`, { params });
+      console.log("Template data", response.data.data);
 
-      // // Store templates for this specific business
-      // setBusinessTemplates((prev) => ({
-      //   ...prev,
-      //   [businessIndex]: response.data.data,
-      // }));
-      // setExpandedBusiness(expandedBusiness === businessIndex ? null : businessIndex);
-
-      //Ye code  delete karna hai yah se start karna hai
-      var _dummyData = [{
-        businessIndex: 0,
-        name: "seasonal_promotion",
-        language: "en_US",
-        category: "MARKETING",
-        components: [
-          {
-            type: "HEADER",
-            format: "TEXT",
-            text: "Our {{1}} is on!",
-            example: {
-              header_text: ["Summer Sale"],
-            },
-          },
-        ],
-      }, {
-        businessIndex: 1,
-        name: "Test Template",
-        language: "en_US",
-        category: "MARKETING",
-        components: [
-          {
-            type: "HEADER",
-            format: "TEXT",
-            text: "Our {{1}} is on!",
-            example: {
-              header_text: ["Summer Sale"],
-            },
-          },
-        ],
-      }]
+      // Store templates for this specific business
       setBusinessTemplates((prev) => ({
         ...prev,
-        [businessIndex]: _dummyData.filter((item) => item.businessIndex === businessIndex),
+        [businessIndex]: response.data.data,
       }));
-      setExpandedBusiness(expandedBusiness === businessIndex ? null : businessIndex);
-      //yah tak delete karna hai
 
+      setExpandedBusiness(expandedBusiness === businessIndex ? null : businessIndex);
     } catch (error) {
       console.error("Error fetching templates:", error);
       setBusinessTemplates((prev) => ({
@@ -185,7 +130,7 @@ const Templates = () => {
             <Card key={index} sx={templatesStyles.card}>
               <CardContent sx={templatesStyles.cardContent}>
                 <Box sx={templatesStyles.businessInfoContainer}>
-                  <Stack direction="column" justifyContent="space-between">
+                  <Stack direction="column">
                     <Typography variant="h6" sx={templatesStyles.businessName}>
                       {data.business_name}
                     </Typography>
@@ -193,20 +138,11 @@ const Templates = () => {
                       {data.business_id}
                     </Typography>
                   </Stack>
-                  <Stack direction="row" spacing={1} justifyContent="flex-end">
-                    <Button
-                      variant="contained"
-                      sx={templatesStyles.primaryButton}
-                      onClick={() => viewTemplates(data.waba_id, index)}
-                    >
+                  <Stack direction="row" spacing={1}>
+                    <Button variant="contained" sx={templatesStyles.primaryButton} onClick={() => viewTemplates(data.waba_id, index)}>
                       {expandedBusiness === index ? "Hide Templates" : "View Templates"}
                     </Button>
-                    <Button
-                      className="h-10"
-                      variant="contained"
-                      sx={templatesStyles.primaryButton}
-                      onClick={createTemplate}
-                    >
+                    <Button className="h-10" variant="contained" sx={templatesStyles.primaryButton} onClick={createTemplate}>
                       Create Template
                     </Button>
                   </Stack>

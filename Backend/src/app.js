@@ -14,9 +14,9 @@ app.use(express.json());
 app.use("/", businessRoutes);
 
 // Health check endpoint
-app.get("/health", (req, res) => {
-  res.status(200).json({ message: "Server is running", timestamp: new Date().toISOString() });
-});
+// app.get("/health", (req, res) => {
+//   res.status(200).json({ message: "Server is running", timestamp: new Date().toISOString() });
+// });
 
 // Database connection and server startup
 const startServer = async () => {

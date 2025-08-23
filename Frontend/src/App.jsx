@@ -7,7 +7,6 @@ import Templates from "./pages/Templates/templates.jsx";
 import Layout from "./components/layout";
 
 const App = () => {
-  
   // Initialize Facebook SDK
   useEffect(() => {
     console.log("App component mounted, loading Facebook SDK script...");
@@ -55,6 +54,6 @@ const App = () => {
       </div>
     </>
   );
-}
+};
 
 export default App;
