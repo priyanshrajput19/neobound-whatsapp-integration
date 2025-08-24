@@ -38,3 +38,63 @@ export const fetchMessageTemplates = async (waba_id, access_token) => {
   const data = await response.json();
   return data;
 };
+
+export const makeTemplate = async (waba_id, access_token) => {
+  const url = `https://graph.facebook.com/v23.0/${waba_id}/message_templates`;
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${access_token}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify({
+    name: "august_sale",
+    language: "en_US",
+    category: "MARKETING",
+    components: [
+      {
+        type: "HEADER",
+        format: "TEXT",
+        text: "Our {{1}} is on!",
+        example: {
+          header_text: ["Summer Sale"],
+        },
+      },
+      {
+        type: "BODY",
+        text: "Shop now through {{1}} and use code {{2}} to get {{3}} off of all merchandise.",
+        example: {
+          body_text: [["the end of August", "25OFF", "25%"]],
+        },
+      },
+      {
+        type: "FOOTER",
+        text: "Use the buttons below to manage your marketing subscriptions",
+      },
+      {
+        type: "BUTTONS",
+        buttons: [
+          {
+            type: "QUICK_REPLY",
+            text: "Unsubscribe from Promos",
+          },
+          {
+            type: "QUICK_REPLY",
+            text: "Unsubscribe from All",
+          },
+        ],
+      },
+    ],
+  });
+
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  const response = await fetch(url, requestOptions);
+  const data = await response.json();
+  console.log("Template created", data);
+  return data;
+};

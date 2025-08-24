@@ -1,5 +1,5 @@
 import { InfoModel } from "../models/esResponse.js";
-import { getAccessToken, fetchBusinessName, fetchMessageTemplates } from "../services/facebookService.js";
+import { getAccessToken, fetchBusinessName, fetchMessageTemplates, makeTemplate } from "../services/facebookService.js";
 
 export const saveBusinessData = async (req, res) => {
   try {
@@ -60,4 +60,17 @@ export const getMessageTemplates = async (req, res) => {
     console.log("Error fetching message templates", error);
     res.status(500).json({ message: "Error fetching message templates" });
   }
+};
+
+export const createTemplate = async (req, res) => {
+  const { waba_id } = req.body;
+
+  const document = await InfoModel.findOne({ waba_id: waba_id });
+  if (!document) {
+    res.status(404).json({ message: "Business data not found" });
+    return;
+  }
+
+  const data = await makeTemplate(waba_id, document.access_token);
+  res.status(200).json(data);
 };

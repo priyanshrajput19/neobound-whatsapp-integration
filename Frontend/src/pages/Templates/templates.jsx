@@ -57,64 +57,14 @@ const Templates = () => {
     }
   };
 
-  const createTemplate = () => {
-    const url = "https://graph.facebook.com/v23.0/102290129340398/message_templates";
-
-    const myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer EAAJB...");
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({
-      name: "seasonal_promotion",
-      language: "en_US",
-      category: "MARKETING",
-      components: [
-        {
-          type: "HEADER",
-          format: "TEXT",
-          text: "Our {{1}} is on!",
-          example: {
-            header_text: ["Summer Sale"],
-          },
-        },
-        {
-          type: "BODY",
-          text: "Shop now through {{1}} and use code {{2}} to get {{3}} off of all merchandise.",
-          example: {
-            body_text: [["the end of August", "25OFF", "25%"]],
-          },
-        },
-        {
-          type: "FOOTER",
-          text: "Use the buttons below to manage your marketing subscriptions",
-        },
-        {
-          type: "BUTTONS",
-          buttons: [
-            {
-              type: "QUICK_REPLY",
-              text: "Unsubscribe from Promos",
-            },
-            {
-              type: "QUICK_REPLY",
-              text: "Unsubscribe from All",
-            },
-          ],
-        },
-      ],
-    });
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch(url, requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error));
+  const createTemplate = async (waba_id) => {
+    try {
+      const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+      const response = await axios.post(`${apiUrl}/createTemplate`, { waba_id: waba_id });
+      console.log("Template created", response.data);
+    } catch (error) {
+      console.error("Error creating template:", error);
+    }
   };
 
   return (
@@ -142,7 +92,7 @@ const Templates = () => {
                     <Button variant="contained" sx={templatesStyles.primaryButton} onClick={() => viewTemplates(data.waba_id, index)}>
                       {expandedBusiness === index ? "Hide Templates" : "View Templates"}
                     </Button>
-                    <Button className="h-10" variant="contained" sx={templatesStyles.primaryButton} onClick={createTemplate}>
+                    <Button className="h-10" variant="contained" sx={templatesStyles.primaryButton} onClick={() => createTemplate(data.waba_id)}>
                       Create Template
                     </Button>
                   </Stack>
