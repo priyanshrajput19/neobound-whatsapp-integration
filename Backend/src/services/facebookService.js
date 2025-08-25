@@ -98,3 +98,12 @@ export const makeTemplate = async (waba_id, access_token) => {
   console.log("Template created", data);
   return data;
 };
+export const fetchTemplatesLibrary = async (access_token) => {
+  const url = `https://graph.facebook.com/v23.0/message_template_library?language=en_US&limit=50&access_token=${access_token}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const responseData = await response.json();
+  return responseData;
+};

@@ -13,6 +13,7 @@ const Sidebar = () => {
     { text: "Connected Accounts", path: "/connectedAcc" },
     { text: "Templates", path: "/templates" },
     { text: "Business Info", path: "/businessInfo" },
+    { text: "Templates Library", path: "/templatesLibrary" },
   ];
 
   const handleNavigation = (route) => {
@@ -65,5 +66,5 @@ const Sidebar = () => {
       </Drawer>
     </>
   );
-}
+};
 export default Sidebar;

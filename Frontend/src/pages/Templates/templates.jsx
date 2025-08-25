@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography, Button, Card, CardContent, Stack, Collapse } from "@mui/material";
 import axios from "axios";
-import TableComponent from "../../components/TableComponent";
+import TableComponent from "../../components/TableComponent/TableComponent";
 import { templatesStyles } from "./templates.styles";
+import { useNavigate } from "react-router-dom";
 
 const Templates = () => {
+  const navigate = useNavigate();
+
   const COLUMNS = [
     { id: "name", label: "Template Name" },
     { id: "category", label: "Category" },
@@ -58,13 +61,14 @@ const Templates = () => {
   };
 
   const createTemplate = async (waba_id) => {
-    try {
-      const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
-      const response = await axios.post(`${apiUrl}/createTemplate`, { waba_id: waba_id });
-      console.log("Template created", response.data);
-    } catch (error) {
-      console.error("Error creating template:", error);
-    }
+    navigate("/templatesLibrary", { state: { waba_id: waba_id } });
+    // try {
+    //   const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+    //   const response = await axios.post(`${apiUrl}/createTemplate`, { waba_id: waba_id });
+    //   console.log("Template created", response.data);
+    // } catch (error) {
+    //   console.error("Error creating template:", error);
+    // }
   };
 
   return (
