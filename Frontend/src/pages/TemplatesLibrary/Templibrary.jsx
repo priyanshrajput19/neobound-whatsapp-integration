@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CardComponent from "../../components/CardComponent/CardComponent";
+import { templibraryStyles } from "./templibrary.styles";
 
 const TemplatesLibrary = () => {
   const [templatesLibrary, setTemplatesLibrary] = useState([]);
@@ -21,7 +22,7 @@ const TemplatesLibrary = () => {
   }, []);
 
   return (
-    <div>
+    <div style={templibraryStyles.mainContainer}>
       {templatesLibrary.map((item, index) => (
         <CardComponent key={index} cardData={item} />
       ))}
