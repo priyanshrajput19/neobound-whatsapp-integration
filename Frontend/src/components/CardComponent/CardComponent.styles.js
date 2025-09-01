@@ -1,20 +1,18 @@
 export const cardStyles = {
-  cardContainer: {},
+  cardContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexDirection: "column",
+  },
   card: {
     minWidth: "300px",
     maxWidth: "300px",
     backgroundColor: "#ffffff",
     borderRadius: "8px",
     margin: "8px",
-    cursor: "pointer",
     transition: "all 0.3s ease",
     display: "flex",
     flexDirection: "column",
-    "&:hover": {
-      backgroundColor: "#f5f5f5",
-      transform: "translateY(-2px)",
-      boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-    },
   },
   cardContent: {
     display: "flex",
@@ -31,6 +29,7 @@ export const cardStyles = {
   },
   cardDescription: {
     color: "black",
+    fontFamily: " Helvetica, Arial, sans-serif ",
     fontSize: "14px",
     lineHeight: "1.4",
     whiteSpace: "pre-line",
@@ -40,9 +39,12 @@ export const cardStyles = {
     alignItems: "center",
     height: "40px",
     backgroundColor: "white",
-    marginLeft: "-12px",
+    margin: "0px -16px -11px -16px",
+    borderRadius: "0 0 10px 10px",
+    padding: "10px",
   },
   cardFooterText: {
-    color: "black",
+    color: "gray",
+    fontFamily: " Helvetica, Arial, sans-serif ",
   },
 };

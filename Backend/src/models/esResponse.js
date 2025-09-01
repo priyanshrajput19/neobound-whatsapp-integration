@@ -12,8 +12,12 @@ const esResponseSchema = new mongoose.Schema({
   },
   access_token: {
     type: String,
+    required: true,
   },
   business_name: {
+    type: String,
+  },
+  phone_number: {
     type: String,
   },
 });

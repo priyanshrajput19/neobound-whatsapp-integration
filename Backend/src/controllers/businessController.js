@@ -1,5 +1,5 @@
 import { InfoModel } from "../models/esResponse.js";
-import { getAccessToken, fetchBusinessName, fetchMessageTemplates, makeTemplate, fetchTemplatesLibrary } from "../services/facebookService.js";
+import { getAccessToken, fetchBusinessName, fetchMessageTemplates, makeTemplate, fetchTemplatesLibrary, fetchPhoneNumber } from "../services/facebookService.js";
 
 export const saveBusinessData = async (req, res) => {
   try {
@@ -8,7 +8,9 @@ export const saveBusinessData = async (req, res) => {
 
     const accessToken = await getAccessToken(tempCode, businessData);
     const businessName = await fetchBusinessName(accessToken, businessData);
+    const phoneNumber = await fetchPhoneNumber(businessData.waba_id, accessToken);
     console.log("Business detail :", businessName);
+    console.log("Phone number :", phoneNumber);
 
     // save access token to database
     const newInfo = new InfoModel({
@@ -17,6 +19,7 @@ export const saveBusinessData = async (req, res) => {
       business_id: businessData.business_id,
       access_token: accessToken, //exchanged token
       business_name: businessName.name,
+      phone_number: phoneNumber.data[0].display_phone_number,
     });
     await newInfo.save();
 
@@ -26,6 +29,7 @@ export const saveBusinessData = async (req, res) => {
       business_id: businessData.business_id,
       waba_id: businessData.waba_id,
       phone_number_id: businessData.phone_number_id,
+      phone_number: phoneNumber.data[0].display_phone_number,
     });
   } catch (error) {
     console.log("Error saving business data", error);
@@ -84,5 +88,17 @@ export const getTemplatesLibrary = async (req, res) => {
     return;
   }
   const response = await fetchTemplatesLibrary(document.access_token);
+  res.status(200).json(response);
+};
+
+export const getBusinessPhoneNumber = async (req, res) => {
+  const { waba_id } = req.query;
+  const document = await InfoModel.findOne({ waba_id: waba_id });
+  if (!document) {
+    res.status(404).json({ message: "Business data not found" });
+    return;
+  }
+  const response = await fetchPhoneNumber(document.waba_id, document.access_token);
+  console.log("Phone number :", response);
   res.status(200).json(response);
 };

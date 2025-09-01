@@ -1,7 +1,7 @@
 export const templibraryStyles = {
   mainContainer: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateColumns: "repeat(3, 1fr)",
     placeItems: "center",
     marginLeft: "240px",
     paddingTop: "16px",
@@ -14,11 +14,16 @@ export const templibraryStyles = {
   cardContainer: {
     display: "flex",
     justifyContent: "center",
-    gap: "16px",
     width: "350px",
     height: "350px",
-    padding: "12px",
     backgroundColor: "#e5ddd5",
     borderRadius: "10px",
+    padding: "12px",
+    cursor: "pointer",
+    transition: "all 0.2s ease",
+    "&:hover": {
+      transform: "translateY(-2px)",
+      boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
+    },
   },
 };

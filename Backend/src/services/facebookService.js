@@ -108,3 +108,15 @@ export const fetchTemplatesLibrary = async (access_token) => {
   const responseData = await response.json();
   return responseData;
 };
+
+export const fetchPhoneNumber = async (waba_id, access_token) => {
+  const fields = ["display_phone_number"];
+  const url = `https://graph.facebook.com/v23.0/${waba_id}/phone_numbers?fields=${fields.join(",")} &access_token=${access_token}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+};

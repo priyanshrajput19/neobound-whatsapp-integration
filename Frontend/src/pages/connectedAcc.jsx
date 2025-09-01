@@ -5,6 +5,7 @@ import axios from "axios";
 
 const ConnectedAcc = () => {
   const [businessData, setBusinessData] = useState([]);
+  const [businessPhoneNumber, setBusinessPhoneNumber] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +23,20 @@ const ConnectedAcc = () => {
 
   const createTemplateHandler = () => {
     navigate("/templates");
+  };
+
+  const getPhoneNumberHandler = () => {
+    const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+    axios
+      .get(`${apiUrl}/businessPhoneNumber`)
+      .then(async (res) => {
+        await setBusinessPhoneNumber(res.data);
+        console.log(res.data);
+        console.log(businessPhoneNumber);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

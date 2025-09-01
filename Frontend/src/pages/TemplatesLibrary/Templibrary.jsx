@@ -3,7 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CardComponent from "../../components/CardComponent/CardComponent";
 import { templibraryStyles } from "./templibrary.styles";
-
+import { Box } from "@mui/material";
 const TemplatesLibrary = () => {
   const [templatesLibrary, setTemplatesLibrary] = useState([]);
   const { waba_id } = useLocation().state;
@@ -22,13 +22,13 @@ const TemplatesLibrary = () => {
   }, []);
 
   return (
-    <div style={templibraryStyles.mainContainer}>
+    <Box sx={templibraryStyles.mainContainer}>
       {templatesLibrary.map((item, index) => (
-        <div key={index} style={templibraryStyles.cardContainer}>
+        <Box key={index} sx={templibraryStyles.cardContainer}>
           <CardComponent cardData={item} />
-        </div>
+        </Box>
       ))}
-    </div>
+    </Box>
   );
 };
 
