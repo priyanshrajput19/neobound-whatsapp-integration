@@ -24,7 +24,9 @@ const TemplatesLibrary = () => {
   return (
     <div style={templibraryStyles.mainContainer}>
       {templatesLibrary.map((item, index) => (
-        <CardComponent key={index} cardData={item} />
+        <div key={index} style={templibraryStyles.cardContainer}>
+          <CardComponent cardData={item} />
+        </div>
       ))}
     </div>
   );

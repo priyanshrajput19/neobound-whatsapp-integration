@@ -29,6 +29,11 @@ const CardComponent = ({ cardData }) => {
           )}
         </CardContent>
       </Card>
+      <div style={cardStyles.cardFooter}>
+        <Typography variant="body2" sx={cardStyles.cardFooterText}>
+          {cardData.name}
+        </Typography>
+      </div>
     </div>
   );
 };

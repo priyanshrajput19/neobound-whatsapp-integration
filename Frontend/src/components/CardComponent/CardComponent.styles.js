@@ -1,14 +1,10 @@
 export const cardStyles = {
-  cardContainer: {
-    gap: "16px",
-  },
+  cardContainer: {},
   card: {
-    minWidth: "350px",
-    maxWidth: "350px",
-    height: "100%",
+    minWidth: "300px",
+    maxWidth: "300px",
     backgroundColor: "#ffffff",
     borderRadius: "8px",
-    padding: "16px",
     margin: "8px",
     cursor: "pointer",
     transition: "all 0.3s ease",
@@ -38,5 +34,15 @@ export const cardStyles = {
     fontSize: "14px",
     lineHeight: "1.4",
     whiteSpace: "pre-line",
+  },
+  cardFooter: {
+    display: "flex",
+    alignItems: "center",
+    height: "40px",
+    backgroundColor: "white",
+    marginLeft: "-12px",
+  },
+  cardFooterText: {
+    color: "black",
   },
 };
