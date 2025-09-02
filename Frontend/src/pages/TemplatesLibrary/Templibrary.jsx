@@ -21,10 +21,14 @@ const TemplatesLibrary = () => {
       });
   }, []);
 
+  const handleCardClick = (item) => {
+    console.log("Card clicked :", item);
+  };
+
   return (
     <Box sx={templibraryStyles.mainContainer}>
       {templatesLibrary.map((item, index) => (
-        <Box key={index} sx={templibraryStyles.cardContainer}>
+        <Box key={index} sx={templibraryStyles.cardContainer} onClick={() => handleCardClick(item)}>
           <CardComponent cardData={item} />
         </Box>
       ))}
