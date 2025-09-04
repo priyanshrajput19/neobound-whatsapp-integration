@@ -29,6 +29,25 @@ const TemplatesLibrary = () => {
     setModalOpen(true);
   };
 
+  const makeTemplate = async (templateName) => {
+    console.log("In template library");
+    console.log("Template name :", templateName);
+
+    const response = await axios.post(`${apiUrl}/createTemplate`, {
+      waba_id: waba_id,
+      name: templateName,
+      language: modalData.language,
+      category: modalData.category,
+      library_template_name: modalData.name,
+      library_template_button_inputs: [],
+    });
+    if (response.status === 200) {
+      console.log("Template created", response.data);
+    } else {
+      console.log("Error creating template", response.data);
+    }
+  };
+
   return (
     <Box className="OuterBox" sx={templibraryStyles.mainContainer}>
       {templatesLibrary.map((item, index) => (
@@ -36,7 +55,7 @@ const TemplatesLibrary = () => {
           <CardComponent cardData={item} />
         </Box>
       ))}
-      <Box>{modalOpen && <Modal modalData={modalData} onClose={() => setModalOpen(false)} />}</Box>
+      <Box>{modalOpen && <Modal modalData={modalData} onClose={() => setModalOpen(false)} onSubmit={makeTemplate} />}</Box>
     </Box>
   );
 };

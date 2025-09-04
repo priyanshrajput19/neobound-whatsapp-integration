@@ -1,5 +1,5 @@
 import { InfoModel } from "../models/esResponse.js";
-import { fetchAccessToken, fetchBusinessName, fetchMessageTemplates, makeTemplate, fetchTemplatesLibrary, fetchPhoneNumber } from "../services/facebookService.js";
+import { fetchAccessToken, fetchBusinessName, fetchMessageTemplates, createTemplate, fetchTemplatesLibrary, fetchPhoneNumber } from "../services/facebookService.js";
 
 export const saveBusinessData = async (req, res) => {
   try {
@@ -66,8 +66,8 @@ export const getMessageTemplates = async (req, res) => {
   }
 };
 
-export const createTemplate = async (req, res) => {
-  const { waba_id } = req.body;
+export const makeTemplate = async (req, res) => {
+  const { waba_id, name, language, category, library_template_name, library_template_button_inputs } = req.body;
 
   const document = await InfoModel.findOne({ waba_id: waba_id });
   if (!document) {
@@ -75,7 +75,7 @@ export const createTemplate = async (req, res) => {
     return;
   }
 
-  const data = await makeTemplate(waba_id, document.access_token);
+  const data = await createTemplate(waba_id, name, language, category, library_template_name, library_template_button_inputs, document.access_token);
   res.status(200).json(data);
 };
 

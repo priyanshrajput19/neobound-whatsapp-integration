@@ -63,7 +63,7 @@ export const fetchPhoneNumber = async (waba_id, access_token) => {
 
 //POST
 
-export const makeTemplate = async (waba_id, access_token) => {
+export const createTemplate = async (waba_id, name, language, category, library_template_name, library_template_button_inputs, access_token) => {
   const url = `https://graph.facebook.com/v23.0/${waba_id}/message_templates`;
 
   const myHeaders = new Headers();
@@ -71,43 +71,11 @@ export const makeTemplate = async (waba_id, access_token) => {
   myHeaders.append("Content-Type", "application/json");
 
   const raw = JSON.stringify({
-    name: "august_sale",
-    language: "en_US",
-    category: "MARKETING",
-    components: [
-      {
-        type: "HEADER",
-        format: "TEXT",
-        text: "Our {{1}} is on!",
-        example: {
-          header_text: ["Summer Sale"],
-        },
-      },
-      {
-        type: "BODY",
-        text: "Shop now through {{1}} and use code {{2}} to get {{3}} off of all merchandise.",
-        example: {
-          body_text: [["the end of August", "25OFF", "25%"]],
-        },
-      },
-      {
-        type: "FOOTER",
-        text: "Use the buttons below to manage your marketing subscriptions",
-      },
-      {
-        type: "BUTTONS",
-        buttons: [
-          {
-            type: "QUICK_REPLY",
-            text: "Unsubscribe from Promos",
-          },
-          {
-            type: "QUICK_REPLY",
-            text: "Unsubscribe from All",
-          },
-        ],
-      },
-    ],
+    name: name,
+    language: language,
+    category: category,
+    library_template_name: library_template_name,
+    library_template_button_inputs: library_template_button_inputs,
   });
 
   const requestOptions = {

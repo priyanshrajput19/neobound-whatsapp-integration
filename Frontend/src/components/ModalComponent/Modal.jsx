@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, TextField, Typography, IconButton } from "@mui/material";
 
 import { Button } from "@mui/material";
 import { modalStyles } from "./Modal.styles";
 import closeIcon from "../../assets/icons/closeModal.svg";
-const Modal = ({ modalData, onClose }) => {
+
+const Modal = ({ modalData, onClose, onSubmit }) => {
+  const [templateName, setTemplateName] = useState("");
+
   const handleSubmit = () => {
     console.log("Submit");
+    onSubmit(templateName);
   };
+
+  const renderButton = (button, index) => {
+    if (button.type.toLowerCase() === "url" || button.type.toLowerCase() === "phone_number") {
+      return (
+        <Box className="button-textfield" key={index}>
+          <Typography key={index} sx={modalStyles.modalBodyTextFieldLabel}>
+            {button.type.replace("_", " ")}
+          </Typography>
+          <TextField key={index} sx={modalStyles.modalBodyTextField} placeholder="Enter Your Button Text" />
+        </Box>
+      );
+    }
+    return null;
+  };
+
   return (
     <>
       <Box className="modal-overlay" sx={modalStyles.modalOverlay} />
@@ -27,17 +46,18 @@ const Modal = ({ modalData, onClose }) => {
           <Typography>Enter template details</Typography>
           <Box className="name-textfield">
             <Typography sx={modalStyles.modalBodyTextFieldLabel}>Enter Your Template Name</Typography>
-            <TextField sx={modalStyles.modalBodyTextField} placeholder="Enter Your Template Name" />
+            <TextField sx={modalStyles.modalBodyTextField} placeholder="Enter Your Template Name" value={templateName} onChange={(e) => setTemplateName(e.target.value)} />
           </Box>
+
           {modalData?.buttons && (
             <Box className="button-textfield">
               <Typography sx={modalStyles.modalBodyTextFieldLabel}>Buttons</Typography>
-              <TextField sx={modalStyles.modalBodyTextField} placeholder="Enter Your Button Text" />
+              {modalData.buttons?.map((button, index) => renderButton(button, index))}
             </Box>
           )}
         </div>
         <footer className="modal-footer" style={modalStyles.modalFooter}>
-          <Button variant="contained" sx={modalStyles.modalFooterButton} onClick={handleSubmit}>
+          <Button variant="contained" sx={modalStyles.modalFooterButton} onClick={handleSubmit} disabled={!templateName.trim()}>
             Submit
           </Button>
         </footer>
