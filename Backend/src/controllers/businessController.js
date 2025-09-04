@@ -1,12 +1,12 @@
 import { InfoModel } from "../models/esResponse.js";
-import { getAccessToken, fetchBusinessName, fetchMessageTemplates, makeTemplate, fetchTemplatesLibrary, fetchPhoneNumber } from "../services/facebookService.js";
+import { fetchAccessToken, fetchBusinessName, fetchMessageTemplates, makeTemplate, fetchTemplatesLibrary, fetchPhoneNumber } from "../services/facebookService.js";
 
 export const saveBusinessData = async (req, res) => {
   try {
     const { tempCode, businessData } = req.body;
     console.log("Recieved data :", tempCode, businessData);
 
-    const accessToken = await getAccessToken(tempCode, businessData);
+    const accessToken = await fetchAccessToken(tempCode, businessData);
     const businessName = await fetchBusinessName(accessToken, businessData);
     const phoneNumber = await fetchPhoneNumber(businessData.waba_id, accessToken);
     console.log("Business detail :", businessName);

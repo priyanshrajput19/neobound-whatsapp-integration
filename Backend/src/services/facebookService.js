@@ -1,7 +1,7 @@
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-
-export const getAccessToken = async (tempCode, businessData) => {
+//GET
+export const fetchAccessToken = async (tempCode, businessData) => {
   const url = "https://graph.facebook.com/v22.0/oauth/access_token";
   const response = await fetch(url, {
     method: "POST",
@@ -38,6 +38,30 @@ export const fetchMessageTemplates = async (waba_id, access_token) => {
   const data = await response.json();
   return data;
 };
+
+export const fetchTemplatesLibrary = async (access_token) => {
+  const url = `https://graph.facebook.com/v23.0/message_template_library?language=en_US&limit=50&access_token=${access_token}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const responseData = await response.json();
+  return responseData;
+};
+
+export const fetchPhoneNumber = async (waba_id, access_token) => {
+  const fields = ["display_phone_number"];
+  const url = `https://graph.facebook.com/v23.0/${waba_id}/phone_numbers?fields=${fields.join(",")} &access_token=${access_token}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const data = await response.json();
+  console.log(data);
+  return data;
+};
+
+//POST
 
 export const makeTemplate = async (waba_id, access_token) => {
   const url = `https://graph.facebook.com/v23.0/${waba_id}/message_templates`;
@@ -96,27 +120,5 @@ export const makeTemplate = async (waba_id, access_token) => {
   const response = await fetch(url, requestOptions);
   const data = await response.json();
   console.log("Template created", data);
-  return data;
-};
-
-export const fetchTemplatesLibrary = async (access_token) => {
-  const url = `https://graph.facebook.com/v23.0/message_template_library?language=en_US&limit=50&access_token=${access_token}`;
-  const response = await fetch(url, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  const responseData = await response.json();
-  return responseData;
-};
-
-export const fetchPhoneNumber = async (waba_id, access_token) => {
-  const fields = ["display_phone_number"];
-  const url = `https://graph.facebook.com/v23.0/${waba_id}/phone_numbers?fields=${fields.join(",")} &access_token=${access_token}`;
-  const response = await fetch(url, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  const data = await response.json();
-  console.log(data);
   return data;
 };

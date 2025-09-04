@@ -29,7 +29,7 @@ const CardComponent = ({ cardData }) => {
     });
   };
 
-  const handleMouseEnter = (body, bodyparams) => {
+  const handleMouseEnter = () => {
     setIsHovered(true);
   };
 
