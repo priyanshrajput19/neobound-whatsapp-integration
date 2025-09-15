@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
-import BusinessInfo from "./pages/businessInfo";
-import ConnectedAcc from "./pages/connectedAcc";
+import Dashboard from "./pages/Dashboard/dashboard.jsx";
+import BusinessInfo from "./pages/BusinessInfo/businessInfo.jsx";
+import ConnectedAcc from "./pages/ConnectedAcc/connectedAcc.jsx";
 import Templates from "./pages/Templates/templates.jsx";
 import Layout from "./components/layout";
 import TemplatesLibrary from "./pages/TemplatesLibrary/Templibrary.jsx";

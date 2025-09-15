@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { grey } from "@mui/material/colors";
 import { Drawer, Toolbar, List, Typography, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
-import axios from "axios";
+import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
+import { TreeItem } from "@mui/x-tree-view/TreeItem";
 
-const color = [grey[600]];
-const drawerWidth = 240;
+import axios from "axios";
+import { sidebarStyles } from "./Sidebar.styles";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -23,21 +23,8 @@ const Sidebar = () => {
 
   return (
     <>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            borderRight: `0.5px solid ${color}`,
-            width: drawerWidth,
-            boxSizing: "border-box",
-            backgroundColor: "#303036",
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar sx={{ color: "white" }}>
+      <Drawer sx={sidebarStyles.drawer} variant="permanent" anchor="left">
+        <Toolbar sx={sidebarStyles.toolbar}>
           <Typography noWrap component="div">
             Whatsapp Dashboard
           </Typography>
@@ -46,18 +33,7 @@ const Sidebar = () => {
         <List>
           {navigationItems.map((item) => (
             <ListItem key={item.text} disablePadding>
-              <ListItemButton
-                sx={{
-                  color: "white",
-                  borderRadius: "10px",
-                  margin: "10px",
-                  "&:hover": {
-                    backgroundColor: "#34a34a",
-                    color: "white",
-                  },
-                }}
-                onClick={() => handleNavigation(item.path)}
-              >
+              <ListItemButton sx={sidebarStyles.listItemButton} onClick={() => handleNavigation(item.path)}>
                 <ListItemText primary={item.text} />
                 <ListItemIcon></ListItemIcon>
               </ListItemButton>

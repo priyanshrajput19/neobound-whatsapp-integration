@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Typography, Button, Stack } from "@mui/material";
-import { checkJSONString } from "../utils/utility";
+import { checkJSONString } from "../../utils/utility";
 import axios from "axios";
+import { dashboardStyles } from "./Dashboard.styles";
 
 const Dashboard = () => {
   const businessDataRef = useRef(null);
@@ -97,19 +98,19 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="header flex justify-between ml-60 items-center">
+    <div style={dashboardStyles.container}>
+      <div style={dashboardStyles.header}>
         <Stack direction="column" spacing={0}>
-          <Typography variant="h6" color="#bfbfbf">
+          <Typography variant="h6" sx={dashboardStyles.headerTitle}>
             WhatsApp Integration
           </Typography>
-          <Typography variant="body1" color="#999999">
+          <Typography variant="body1" sx={dashboardStyles.headerDescription}>
             Connect your WhatsApp Business and send messages, manage templates and edit your business info
           </Typography>
         </Stack>
 
         <Stack direction="row" spacing={2}>
-          <Button variant="contained" sx={{ backgroundColor: "#17a34a" }} className="h-10" onClick={handleWhatsAppSignup}>
+          <Button variant="contained" sx={dashboardStyles.connectButton} onClick={handleWhatsAppSignup}>
             Connect to WhatsApp
           </Button>
         </Stack>
