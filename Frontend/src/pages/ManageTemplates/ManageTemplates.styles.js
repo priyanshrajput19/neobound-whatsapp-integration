@@ -1,4 +1,4 @@
-export const templibraryStyles = {
+export const manageTemplatesStyles = {
   mainContainer: {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",

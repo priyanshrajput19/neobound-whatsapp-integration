@@ -5,7 +5,7 @@ import BusinessInfo from "./pages/BusinessInfo/businessInfo.jsx";
 import ConnectedAcc from "./pages/ConnectedAcc/connectedAcc.jsx";
 import Templates from "./pages/Templates/templates.jsx";
 import Layout from "./components/layout";
-import TemplatesLibrary from "./pages/TemplatesLibrary/Templibrary.jsx";
+import ManageTemplates from "./pages/ManageTemplates/ManageTemplates.jsx";
 
 const App = () => {
   // Initialize Facebook SDK
@@ -46,10 +46,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
-              <Route path="templates" element={<Templates />} />
-              <Route path="businessInfo" element={<BusinessInfo />} />
-              <Route path="connectedAcc" element={<ConnectedAcc />} />
-              <Route path="templatesLibrary" element={<TemplatesLibrary />} />
+              {/* <Route path="templates" element={<Templates />} /> */}
+              {/* <Route path="businessInfo" element={<BusinessInfo />} /> */}
+              {/* <Route path="connectedAcc" element={<ConnectedAcc />} /> */}
+              <Route path="templatesLibrary" element={<ManageTemplates />} />
             </Route>
           </Routes>
         </BrowserRouter>

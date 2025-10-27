@@ -11,10 +11,10 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const navigationItems = [
     { text: "Dashboard", path: "/dashboard" },
-    { text: "Connected Accounts", path: "/connectedAcc" },
-    { text: "Templates", path: "/templates" },
-    { text: "Business Info", path: "/businessInfo" },
-    { text: "Templates Library", path: "/templatesLibrary" },
+    // { text: "Connected Accounts", path: "/connectedAcc" },
+    // { text: "Templates", path: "/templates" },
+    // { text: "Business Info", path: "/businessInfo" },
+    { text: "Manage Templates", path: "/templatesLibrary" },
   ];
 
   const handleNavigation = (route) => {

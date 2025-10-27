@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 import CardComponent from "../../components/CardComponent/CardComponent";
-import { templibraryStyles } from "./templibrary.styles";
+import { manageTemplatesStyles } from "./ManageTemplates.styles";
 import { Box } from "@mui/material";
 import Modal from "../../components/ModalComponent/Modal";
-const TemplatesLibrary = () => {
+
+const ManageTemplates = () => {
   const [templatesLibrary, setTemplatesLibrary] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const { waba_id } = useLocation().state;
+  const waba_id = 1474335873705932; //useLocation().state;
   const apiUrl = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
 
   useEffect(() => {
@@ -49,9 +50,9 @@ const TemplatesLibrary = () => {
   };
 
   return (
-    <Box className="OuterBox" sx={templibraryStyles.mainContainer}>
+    <Box className="OuterBox" sx={manageTemplatesStyles.mainContainer}>
       {templatesLibrary.map((item, index) => (
-        <Box className="InnerBox" key={index} sx={templibraryStyles.cardContainer} onClick={() => handleCardClick(item)}>
+        <Box className="InnerBox" key={index} sx={manageTemplatesStyles.cardContainer} onClick={() => handleCardClick(item)}>
           <CardComponent cardData={item} />
         </Box>
       ))}
@@ -60,4 +61,4 @@ const TemplatesLibrary = () => {
   );
 };
 
-export default TemplatesLibrary;
+export default ManageTemplates;
