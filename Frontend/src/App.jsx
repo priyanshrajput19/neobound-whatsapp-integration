@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/dashboard.jsx";
 import Layout from "./components/layout";
 import ManageTemplates from "./pages/ManageTemplates/ManageTemplates.jsx";
-
+import CustomTemplate from "./pages/ManageTemplates/CustomTemplate/customTemplate.jsx";
 const App = () => {
   // Initialize Facebook SDK
   useEffect(() => {
@@ -44,6 +44,7 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="manageTemplates" element={<ManageTemplates />} />
+              <Route path="newTemplate" element={<CustomTemplate />} />
             </Route>
           </Routes>
         </BrowserRouter>

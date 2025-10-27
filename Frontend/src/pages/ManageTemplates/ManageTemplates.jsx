@@ -3,10 +3,11 @@ import { manageTemplatesStyles } from "./ManageTemplates.styles";
 import { Box, Typography, Button } from "@mui/material";
 import Templates from "./Templates/templates";
 import TemplateLibrary from "./TemplateLibrary/TemplateLibrary";
+import { useNavigate } from "react-router-dom";
 
 const ManageTemplates = () => {
   const [activeTab, setActiveTab] = useState("Explore");
-
+  const navigate = useNavigate();
   return (
     <>
       {/* Navigation Bar */}
@@ -37,7 +38,7 @@ const ManageTemplates = () => {
             </Typography>
           </Box>
         </Box>
-        <Button variant="contained" color="primary" sx={manageTemplatesStyles.newTemplateButton}>
+        <Button variant="contained" color="primary" sx={manageTemplatesStyles.newTemplateButton} onClick={() => navigate("/newTemplate")}>
           + New
         </Button>
       </Box>
