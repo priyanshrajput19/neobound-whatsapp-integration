@@ -5,7 +5,7 @@ import CardComponent from "../../components/CardComponent/CardComponent";
 import { manageTemplatesStyles } from "./ManageTemplates.styles";
 import { Box, Typography } from "@mui/material";
 import Modal from "../../components/ModalComponent/Modal";
-import Templates from "../Templates/templates";
+import Templates from "./Templates/templates";
 
 const ManageTemplates = () => {
   const [templatesLibrary, setTemplatesLibrary] = useState([]);
