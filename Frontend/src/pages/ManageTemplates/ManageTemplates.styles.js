@@ -2,11 +2,17 @@ export const manageTemplatesStyles = {
   // Navigation bar styles
   navBar: {
     display: "flex",
-    gap: "32px",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingLeft: "20px",
+    paddingRight: "20px",
     paddingTop: "16px",
     marginLeft: "240px",
     borderBottom: "1px solid #e5e5e5",
+  },
+  navTabsContainer: {
+    display: "flex",
+    gap: "32px",
   },
   navItem: {
     cursor: "pointer",
@@ -21,5 +27,12 @@ export const manageTemplatesStyles = {
     fontWeight: 500,
     paddingBottom: "8px",
     transition: "all 0.2s ease",
+  },
+  newTemplateButton: {
+    backgroundColor: "#17a34a",
+    color: "white",
+    "&:hover": {
+      backgroundColor: "#15803d",
+    },
   },
 };
