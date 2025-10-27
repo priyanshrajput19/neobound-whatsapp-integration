@@ -38,7 +38,7 @@ const App = () => {
 
   return (
     <>
-      <div className="bg-zinc-800 h-dvh">
+      <div className="bg-[#191919] h-dvh">
         <BrowserRouter basename="/">
           <Routes>
             <Route path="/" element={<Layout />}>

@@ -11,7 +11,7 @@ export const sidebarStyles = {
       borderRight: `0.5px solid ${color}`,
       width: drawerWidth,
       boxSizing: "border-box",
-      background: "linear-gradient(360deg, #4a4a55 0%, #2a2a30 100%)",
+      backgroundColor: "#303036",
     },
   },
   toolbar: {
