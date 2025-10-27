@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard/dashboard.jsx";
-import BusinessInfo from "./pages/BusinessInfo/businessInfo.jsx";
-import ConnectedAcc from "./pages/ConnectedAcc/connectedAcc.jsx";
-
 import Layout from "./components/layout";
 import ManageTemplates from "./pages/ManageTemplates/ManageTemplates.jsx";
 
@@ -46,10 +43,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route path="dashboard" element={<Dashboard />} />
-              {/* <Route path="templates" element={<Templates />} /> */}
-              {/* <Route path="businessInfo" element={<BusinessInfo />} /> */}
-              {/* <Route path="connectedAcc" element={<ConnectedAcc />} /> */}
-              <Route path="templatesLibrary" element={<ManageTemplates />} />
+              <Route path="manageTemplates" element={<ManageTemplates />} />
             </Route>
           </Routes>
         </BrowserRouter>
