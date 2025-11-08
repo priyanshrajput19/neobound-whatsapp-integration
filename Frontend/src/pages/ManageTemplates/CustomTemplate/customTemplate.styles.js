@@ -15,4 +15,27 @@ export const customTemplateStyles = {
     borderRadius: "6px",
     backgroundColor: "#27272a",
   },
+  formControl: {
+    width: "50%",
+    borderColor: "#17a34a",
+  },
+  formControlLabel: {
+    color: "#acacac",
+  },
+  templateCategoryContainer: {
+    color: "white",
+    marginBottom: "20px",
+  },
+  templateLanguageContainer: {
+    color: "white",
+    marginBottom: "20px",
+  },
+  templateNameContainer: {
+    color: "white",
+    marginTop: "20px",
+  },
+  description: {
+    color: "#acacac",
+    fontSize: "14px",
+  },
 };
