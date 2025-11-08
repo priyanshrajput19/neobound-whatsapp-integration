@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Select, FormControl, InputLabel, MenuItem } from "@mui/material";
+import { Box, Typography, Select, FormControl, InputLabel, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 import { customTemplateStyles } from "./customTemplate.styles";
 const CustomTemplate = () => {
@@ -33,7 +33,7 @@ const CustomTemplate = () => {
               <InputLabel id="template-category-label" sx={customTemplateStyles.formControlLabel}>
                 Select message categories
               </InputLabel>
-              <Select labelId="template-category-label" id="template-category" value={templateCategory} label="Select message categories" onChange={handleCategoryChange}>
+              <Select sx={customTemplateStyles.selectControl} labelId="template-category-label" id="template-category" value={templateCategory} label="Select message categories" onChange={handleCategoryChange}>
                 <MenuItem value="marketing">Marketing</MenuItem>
                 <MenuItem value="utility">Utility</MenuItem>
                 <MenuItem value="authentication">Authentication</MenuItem>
@@ -52,7 +52,7 @@ const CustomTemplate = () => {
               <InputLabel id="template-language-label" sx={customTemplateStyles.formControlLabel}>
                 Select message language
               </InputLabel>
-              <Select labelId="template-language-label" id="template-language" value={templateLanguage} label="Select message language" onChange={handleLanguageChange}>
+              <Select sx={customTemplateStyles.selectControl} labelId="template-language-label" id="template-language" value={templateLanguage} label="Select message language" onChange={handleLanguageChange}>
                 <MenuItem value="en_US">English</MenuItem>
                 <MenuItem value="en_GB">English (UK)</MenuItem>
                 <MenuItem value="fr_FR">French</MenuItem>
@@ -77,6 +77,7 @@ const CustomTemplate = () => {
                 Name can only be in lowercase alphanumeric characters and underscores. Special characters and white-spaces are not allowed. example: "welcome_message"
               </Typography>
             </Typography>
+            <TextField sx={customTemplateStyles.templateNameTextField} placeholder="Enter template name" />
           </Box>
         </Box>
       </Box>
