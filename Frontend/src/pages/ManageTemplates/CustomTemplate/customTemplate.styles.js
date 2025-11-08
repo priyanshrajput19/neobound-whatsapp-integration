@@ -34,24 +34,33 @@ export const customTemplateStyles = {
     color: "white",
     marginBottom: "20px",
   },
-  templateNameContainer: {
+  fullWidthTemplateContainer: {
     color: "white",
     marginTop: "20px",
+    marginBottom: "10px",
   },
   description: {
     color: "#acacac",
     fontSize: "14px",
   },
-  templateNameTextField: {
-    width: "50%",
-    borderColor: "#17a34a",
+  InputTextField: {
+    width: "95%",
     "& .MuiInputBase-input::placeholder": {
       color: "#acacac",
       opacity: 1,
     },
+    "& .MuiInputBase-input": {
+      padding: "9px 14px",
+    },
+    "& .MuiInputBase-root": {
+      borderRadius: "10px",
+      "& fieldset": { borderColor: "#1a1a1d" },
+      "&:hover fieldset": { borderColor: "#17a34a" },
+      "&.Mui-focused fieldset": { borderColor: "#17a34a" },
+    },
   },
   selectControl: {
-    width: "90%",
+    width: "100%",
     "& .MuiOutlinedInput-root": {
       color: "#acacac",
       borderRadius: "6px",
@@ -77,5 +86,11 @@ export const customTemplateStyles = {
   },
   selectControlLabel: {
     color: "#acacac",
+  },
+  widthFull: {
+    width: "95%",
+  },
+  fullWidthContainer: {
+    gridColumn: "1 / -1",
   },
 };

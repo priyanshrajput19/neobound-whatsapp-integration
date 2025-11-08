@@ -5,12 +5,17 @@ import { customTemplateStyles } from "./customTemplate.styles";
 const CustomTemplate = () => {
   const [templateCategory, setTemplateCategory] = useState("");
   const [templateLanguage, setTemplateLanguage] = useState("");
+  const [templateType, setTemplateType] = useState("");
   const handleCategoryChange = (event) => {
     setTemplateCategory(event.target.value);
   };
 
   const handleLanguageChange = (event) => {
     setTemplateLanguage(event.target.value);
+  };
+
+  const handleTypeChange = (event) => {
+    setTemplateType(event.target.value);
   };
 
   return (
@@ -70,14 +75,75 @@ const CustomTemplate = () => {
             </FormControl>
           </Box>
 
-          <Box id="template-name-container">
-            <Typography variant="body1" sx={customTemplateStyles.templateNameContainer}>
+          <Box id="template-name-container" sx={customTemplateStyles.fullWidthContainer}>
+            <Typography variant="body1" sx={customTemplateStyles.fullWidthTemplateContainer}>
               Template Name
               <Typography variant="subtitle2" sx={customTemplateStyles.description}>
-                Name can only be in lowercase alphanumeric characters and underscores. Special characters and white-spaces are not allowed. example: "welcome_message"
+                Name can only be in lowercase alphanumeric characters and underscores.
+              </Typography>
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                Special characters and white-spaces are not allowed.
+              </Typography>
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                example: "welcome_message"
               </Typography>
             </Typography>
-            <TextField sx={customTemplateStyles.templateNameTextField} placeholder="Enter template name" />
+            <TextField sx={customTemplateStyles.InputTextField} placeholder="Enter template name" />
+          </Box>
+
+          <Box id="template-type-container" sx={customTemplateStyles.fullWidthContainer}>
+            <Typography variant="body1" sx={customTemplateStyles.fullWidthTemplateContainer}>
+              Template Type
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                You will need to specify the type of template you want to create.
+              </Typography>
+            </Typography>
+            <FormControl sx={customTemplateStyles.widthFull}>
+              <InputLabel id="template-type-label" sx={customTemplateStyles.formControlLabel}>
+                Select template type
+              </InputLabel>
+              <Select sx={customTemplateStyles.selectControl} labelId="template-type-label" id="template-type" value={templateType} label="Select template type" onChange={handleTypeChange}>
+                <MenuItem value="text">Text</MenuItem>
+                <MenuItem value="image">Image</MenuItem>
+                <MenuItem value="video">Video</MenuItem>
+                <MenuItem value="document">Document</MenuItem>
+                <MenuItem value="sticker">Location</MenuItem>
+                <MenuItem value="carousel">Carousel</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+
+          <Box id="template-headerText-container" sx={customTemplateStyles.fullWidthContainer}>
+            <Typography variant="body1" sx={customTemplateStyles.fullWidthTemplateContainer}>
+              Template Header Text
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                Header Text is optional and only upto 60 characters are allowed.
+              </Typography>
+            </Typography>
+            <TextField sx={customTemplateStyles.InputTextField} placeholder="Enter header text" />
+          </Box>
+
+          <Box id="template-bodyFormat-container" sx={customTemplateStyles.fullWidthContainer}>
+            <Typography variant="body1" sx={customTemplateStyles.fullWidthTemplateContainer}>
+              Template Format
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                Your message content.Up to 1024 characters are allowed.
+              </Typography>
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                example: "Hello {"1"}, welcome to our platform."
+              </Typography>
+            </Typography>
+            <TextField sx={customTemplateStyles.InputTextField} placeholder="Enter body text" />
+          </Box>
+
+          <Box id="template-footer-container" sx={customTemplateStyles.fullWidthContainer}>
+            <Typography variant="body1" sx={customTemplateStyles.fullWidthTemplateContainer}>
+              Template Footer Text
+              <Typography variant="subtitle2" sx={customTemplateStyles.description}>
+                Footer Text is optional and only upto 60 characters are allowed.
+              </Typography>
+            </Typography>
+            <TextField sx={customTemplateStyles.InputTextField} placeholder="Enter footer text" />
           </Box>
         </Box>
       </Box>
