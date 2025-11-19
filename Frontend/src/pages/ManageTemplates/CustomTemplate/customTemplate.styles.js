@@ -93,4 +93,10 @@ export const customTemplateStyles = {
   fullWidthContainer: {
     gridColumn: "1 / -1",
   },
+  buttonContainer: {
+    paddingTop: "10px",
+  },
+  submitButton: {
+    backgroundColor: "#17a34a ",
+  },
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Select, FormControl, InputLabel, MenuItem, TextField } from "@mui/material";
+import { Box, Typography, Select, FormControl, InputLabel, MenuItem, TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { customTemplateStyles } from "./customTemplate.styles";
 const CustomTemplate = () => {
@@ -16,6 +16,10 @@ const CustomTemplate = () => {
 
   const handleTypeChange = (event) => {
     setTemplateType(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    console.log("Submit");
   };
 
   return (
@@ -144,6 +148,12 @@ const CustomTemplate = () => {
               </Typography>
             </Typography>
             <TextField sx={customTemplateStyles.InputTextField} placeholder="Enter footer text" />
+          </Box>
+
+          <Box id="submit-button-container" sx={customTemplateStyles.buttonContainer}>
+            <Button variant="contained" sx={customTemplateStyles.submitButton} onsubmit={handleSubmit}>
+              Submit
+            </Button>
           </Box>
         </Box>
       </Box>
