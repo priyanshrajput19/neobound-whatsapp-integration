@@ -102,3 +102,14 @@ export const getBusinessPhoneNumber = async (req, res) => {
   console.log("Phone number :", response);
   res.status(200).json(response);
 };
+
+export const createCustomTemplate = async (req, res) => {
+  try {
+    const templateData = req.body;
+    console.log("Received template data from frontend:", JSON.stringify(templateData, null, 2));
+    res.status(200).json({ message: "Template data received successfully", data: templateData });
+  } catch (error) {
+    console.log("Error in createCustomTemplate:", error);
+    res.status(500).json({ message: "Error processing template data" });
+  }
+};
