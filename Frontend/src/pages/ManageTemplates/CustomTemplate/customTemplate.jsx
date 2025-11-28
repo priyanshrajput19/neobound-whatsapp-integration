@@ -116,9 +116,9 @@ const CustomTemplate = () => {
                   Select message categories
                 </InputLabel>
                 <Select sx={customTemplateStyles.selectControl} labelId="template-category-label" id="template-category" value={templateCategory} label="Select message categories" onChange={handleCategoryChange}>
-                  <MenuItem value="marketing">Marketing</MenuItem>
-                  <MenuItem value="utility">Utility</MenuItem>
-                  <MenuItem value="authentication">Authentication</MenuItem>
+                  <MenuItem value="marketing">marketing</MenuItem>
+                  <MenuItem value="utility">utility</MenuItem>
+                  <MenuItem value="authentication">authentication</MenuItem>
                 </Select>
               </FormControl>
             </Box>

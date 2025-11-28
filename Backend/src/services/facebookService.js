@@ -90,3 +90,7 @@ export const createTemplate = async (waba_id, name, language, category, library_
   console.log("Template created", data);
   return data;
 };
+
+export const createCustomTemplate = async (access_token, templateData) => {
+  const url = ab;
+};

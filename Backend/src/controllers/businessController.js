@@ -106,6 +106,14 @@ export const getBusinessPhoneNumber = async (req, res) => {
 export const createCustomTemplate = async (req, res) => {
   try {
     const templateData = req.body;
+
+    const document = await InfoModel.findOne({ waba_id: templateData.waba_id });
+    if (!document) {
+      res.status(404).json({ message: "Business not found" });
+      return;
+    }
+    const response = await createCustomTemplate(document.access_token, templateData);
+
     console.log("Received template data from frontend:", JSON.stringify(templateData, null, 2));
     res.status(200).json({ message: "Template data received successfully", data: templateData });
   } catch (error) {
