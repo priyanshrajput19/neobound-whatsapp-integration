@@ -91,6 +91,21 @@ export const createTemplate = async (waba_id, name, language, category, library_
   return data;
 };
 
-export const createCustomTemplate = async (access_token, templateData) => {
-  const url = ab;
+export const makeCustomTemplate = async (access_token, templateData) => {
+  const url = `https://graph.facebook.com/v23.0/1474335873705932/message_templates`;
+
+  const myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${access_token}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  const raw = JSON.stringify(templateData);
+  const requestOptions = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+  const response = await fetch(url, requestOptions);
+  const data = await response.json();
+  return data;
 };

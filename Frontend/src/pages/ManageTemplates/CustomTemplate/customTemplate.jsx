@@ -37,8 +37,9 @@ const CustomTemplate = () => {
       components.push({
         type: "header",
         format: headerFormat,
+        text: headerText,
         example: {
-          header_handle: [headerText],
+          header_text: [headerText],
         },
       });
     }
