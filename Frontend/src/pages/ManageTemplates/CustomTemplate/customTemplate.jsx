@@ -39,7 +39,7 @@ const CustomTemplate = () => {
         format: headerFormat,
         text: headerText,
         example: {
-          header_text: [headerText],
+          header_text: headerText,
         },
       });
     }
@@ -78,6 +78,7 @@ const CustomTemplate = () => {
       name: templateName,
       language: templateLanguage,
       category: templateCategory,
+      parameter_format: "named", //required otherwise rejected by Facebook
       components: components,
     };
 
